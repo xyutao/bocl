@@ -90,7 +90,7 @@ class SampleDataset(dataset._DownloadedDataset):
 
 
 ## if the datasets is the imagenet
-class imagenet_SampleDataset(dataset.Dataset):
+class Imagenet_SampleDataset(dataset.Dataset):
     def __init__(self, dataset, sample_inds):
         self.name= dataset.name
         self._dataset = dataset
