@@ -275,7 +275,7 @@ def train(net, ctx):
     for sess in range(sessions):
 
         record_acc[sess] = list()
-        logging.info("[Session %d] begin training ..." % sess)
+        logging.info("[Session %d] begin training ..." % (sess+1))
         if sess == 0 and opt.resume_s1:
             _, val_acc = test(net, ctx, val_dataloader)
             record_acc[sess].append(val_acc)
@@ -289,7 +289,7 @@ def train(net, ctx):
 
         if sess != 0:
             # Sampling data for continuous training
-            logging.info("[Session %d] sampling training data and pillars ..." % (sess))
+            logging.info("[Session %d] sampling training data and pillars ..." % (sess+1))
             dataloader = get_dataloader(train_dataset, batch_size=100, train=False)
             train_dataset = data_sampler.sample_dataset(
                 train_dataset, dataloader, net, loss_fn, num_data_samples, ctx=ctx)
@@ -339,7 +339,7 @@ def train(net, ctx):
             if epoch >= epochs[sess] - 5:
                 record_acc[sess].append(val_acc)
 
-            training_record = [sess, epoch, acc, val_acc, train_loss]
+            training_record = [sess+1, epoch, acc, val_acc, train_loss]
             if use_pillars:
                 training_record += [train_plc_loss]
             training_record += [time.time() - tic]
@@ -361,7 +361,7 @@ def train(net, ctx):
     for i in range(len(list(record_acc.keys()))):
         mean = np.mean(np.array(record_acc[i]))
         std = np.std(np.array(record_acc[i]))
-        print('[Sess %d] Mean=%f Std=%f' % (i, mean, std))
+        print('[Sess %d] Mean=%f Std=%f' % (i+1, mean, std))
 
     # compute_average_acc(record_acc)
 
