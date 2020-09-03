@@ -1,0 +1,24 @@
+python3 tools/train_cifar10_naive.py \
+  --epochs 20 \
+  --inc-epochs 10 \
+  --mode hybrid \
+  --gpus 0 \
+  -j 4 \
+  --batch-size 100 \
+  --inc-batch-size 100 \
+  --wd 0.0001 \
+  --inc-wd 0 \
+  --lr 0.1 \
+  --inc-lr 0.001 \
+  --lr-decay 0.1 \
+  --inc-lr-decay 0.5 \
+  --lr-decay-epoch 10,15 \
+  --inc-lr-decay-epoch 40 \
+  --initializer prelu \
+  --sessions 5 \
+  --data-sampler 0 \
+  --name cifar_resnet20_v1_naive_r0 \
+  --model cifar_resnet20_v1 \
+  --data-aug\
+  --resume-s1 \
+  --resume-from 'params/cifar10_baseline/cifar10_cifar_resnet20_v1_0-20.params'
